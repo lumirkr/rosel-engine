@@ -85,10 +85,7 @@ export default function RoselEngineApp() {
   };
 
   const handleLogin = () => {
-    setIsLoading(true);
-  };
-
-  const finishLoading = () => {
+    console.log("Login exitoso, guardando sesión...");
     localStorage.setItem('rosel_auth_token', 'valid');
     setIsAuthenticated(true);
     setIsLoading(false);
@@ -114,13 +111,13 @@ export default function RoselEngineApp() {
   );
 
   // --- CONDICIONAL DE SEGURIDAD (LOGIN) ---
-  if (!isAuthenticated) { 
-    return <LoginView onLogin={handleLogin} />; 
+  if (!isAuthenticated) {
+    return <LoginView onLogin={() => setIsLoading(true)} />;
   }
 
   // Mostrar BootLoader durante la carga
   if (isLoading) {
-    return <BootLoader onComplete={finishLoading} />;
+    return <BootLoader onComplete={handleLogin} />;
   }
 
   // --- INTERFAZ PRINCIPAL ---
