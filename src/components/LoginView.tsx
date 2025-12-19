@@ -18,6 +18,7 @@ const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
     // Simulación de verificación
     setTimeout(() => {
       if (password === 'admin' || password === '1234') { // Contraseña simple para demo
+        setLoading(false);
         onLogin();
       } else {
         setError(true);
